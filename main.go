@@ -32,6 +32,7 @@ func main() {
 	}
 
 	http.HandleFunc("/databases", api.ListDatabases)
+	http.HandleFunc("/slowops/{database}", api.GetSlowOpsPerDb)
 	http.HandleFunc("/slowops", api.GetSlowOps)
 
 	log.Println("Server running at :8080")

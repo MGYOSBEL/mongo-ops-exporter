@@ -47,3 +47,27 @@ func (a *API) GetSlowOps(w http.ResponseWriter, r *http.Request) {
 	}
 	json.NewEncoder(w).Encode(allOps)
 }
+
+func (a *API) GetSlowOpsPerDb(w http.ResponseWriter, r *http.Request) {
+	slowMS, _ := strconv.Atoi(r.URL.Query().Get("slowms"))
+	limit, _ := strconv.Atoi(r.URL.Query().Get("limit"))
+	if slowMS == 0 {
+		slowMS = DEFAULT_SLOWMS
+	}
+	if limit == 0 {
+		limit = DEFAULT_LIMIT
+	}
+
+	database := r.PathValue("database")
+	allOps := make(map[string][]mongo.Operation)
+	for _, db := range a.Clients {
+		if db.Name != database {
+			continue
+		}
+		ops, err := db.GetSlowOps(slowMS, limit)
+		if err == nil {
+			allOps[db.Name] = append(allOps[db.Name], ops...)
+		}
+	}
+	json.NewEncoder(w).Encode(allOps)
+}

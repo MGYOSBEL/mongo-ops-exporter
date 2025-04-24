@@ -1,7 +1,9 @@
 enable-cache: true
 scraping-time: 30s
 databases:
-  - name: db1
+  - name: localhost
     uri: mongodb://localhost:27017
-  # - name: db2
-  #   uri: mongodb://localhost:27018
+  - name: akocloud-dev
+    uri: mongodb://172.30.250.77:27017
+  - name: akocloud-pro
+    uri: mongodb://db.akonet.internal:27017
