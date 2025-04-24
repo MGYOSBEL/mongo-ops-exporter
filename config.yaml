@@ -1,0 +1,7 @@
+enable-cache: true
+scraping-time: 30s
+databases:
+  - name: db1
+    uri: mongodb://localhost:27017
+  # - name: db2
+  #   uri: mongodb://localhost:27018
