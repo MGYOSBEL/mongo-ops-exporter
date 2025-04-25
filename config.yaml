@@ -3,9 +3,3 @@ scraping-time: 30s
 databases:
   - name: localhost
     uri: mongodb://localhost:27017
-  - name: akocloud-dev
-    uri: mongodb://172.30.250.77:27017
-  - name: akocloud-pro
-    uri: mongodb://db.akonet.internal:27017
-  - name: akocloud-pre
-    uri: mongodb://172.30.248.166:27017

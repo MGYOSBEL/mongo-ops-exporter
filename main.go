@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"log"
 	"net/http"
 
@@ -9,8 +10,16 @@ import (
 	"github.com/MGYOSBEL/mongo-ops-exporter/mongo"
 )
 
+var configFile string
+
+func init() {
+	flag.StringVar(&configFile, "config.file", "config.yaml", "The file configuration path")
+	flag.StringVar(&configFile, "f", "config.yaml", "The file configuration path")
+}
+
 func main() {
-	cfg, err := config.LoadConfig("config.yaml")
+	flag.Parse()
+	cfg, err := config.LoadConfig(configFile)
 	if err != nil {
 		log.Fatal(err)
 	}
